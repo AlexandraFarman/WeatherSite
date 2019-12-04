@@ -3,7 +3,7 @@ document.onload = showPosition();
 function showPosition() {
     const myPosition = document.getElementById("myPosition");
     const currentPosition = navigator.geolocation.getCurrentPosition((position) => {
-        myPosition.innerHTML = "Latitud: " + position.coords.latitude + " Longitud: " + position.coords.longitude;
+        myPosition.innerHTML = "Latitude: " + position.coords.latitude + " Longitude: " + position.coords.longitude;
         const url = "https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/" + Math.round(position.coords.longitude) +
             "/lat/" + Math.round(position.coords.latitude) + "/data.json";
         fetch(url)
@@ -28,6 +28,7 @@ function showPosition() {
 }
 
 function populateTable(data) {
+
     for (i = 0; i < data.timeSeries.length; i++) {
         if (data.timeSeries[i].validTime.includes("T12:00:00Z")) {
             const date = data.timeSeries[i].validTime.slice(0, 10);
