@@ -8,141 +8,117 @@ function showPosition() {
             "/lat/" + Math.round(position.coords.latitude) + "/data.json";
         fetch(url)
             .then(
-                function(response) {
+                function (response) {
                     if (response.status !== 200) {
                         console.log('Looks like there was a problem. Status Code: ' +
                             response.status);
                         return;
                     }
                     // Examine the text in the response
-                    response.json().then(function(data) {
+                    response.json().then(function (data) {
                         console.log(data);
                         populateTable(data);
                     });
                 }
             )
-            .catch(function(err) {
+            .catch(function (err) {
                 console.log('Fetch Error :-S', err);
             });
     });
 }
 
 function populateTable(data) {
-    for (i = 0; i < data.timeSeries.length; i++) {
-        if (data.timeSeries[i].validTime.includes("T12:00:00Z")) {
-            const date = data.timeSeries[i].validTime.slice(0, 10);
-            const weatherCode = data.timeSeries[i].parameters[18].values[0];
+    data.timeSeries.filter(timeSerie => timeSerie.validTime.includes("T12:00:00Z"))
+        .forEach(timeSerie => {
+            const date = timeSerie.validTime.slice(0, 10);
+            const weatherCode = timeSerie.parameters[18].values[0];
             const tr = document.createElement('tr');
+            const tableBodyElement = document.getElementById("forecast").lastElementChild;
+            let imageSrc;
             switch (weatherCode) {
                 case 1:
-                    tr.innerHTML = "<td>" + date + "</td><td><img src= 'images/1.png' width='60' height='40' /></td>";
-                    document.getElementById("forecast").lastElementChild.append(tr);
+                    imageSrc = 'images/1.png'
                     break;
                 case 2:
-                    tr.innerHTML = "<td>" + date + "</td><td><img src= 'images/2.png' width='60' height='40' /></td>";
-                    document.getElementById("forecast").lastElementChild.append(tr);
+                    imageSrc = 'images/2.png'
                     break;
                 case 3:
-                    tr.innerHTML = "<td>" + date + "</td><td><img src= 'images/3.png' width='60' height='40' /></td>";
-                    document.getElementById("forecast").lastElementChild.append(tr);
+                    imageSrc = 'images/3.png'
                     break;
                 case 4:
-                    tr.innerHTML = "<td>" + date + "</td><td><img src= 'images/4.png' width='60' height='40' /></td>";
-                    document.getElementById("forecast").lastElementChild.append(tr);
+                    imageSrc = 'images/4.png'
                     break;
                 case 5:
-                    tr.innerHTML = "<td>" + date + "</td><td><img src= 'images/5.png' width='60' height='40' /></td>";
-                    document.getElementById("forecast").lastElementChild.append(tr);
+                    imageSrc = 'images/5.png'
                     break;
                 case 6:
-                    tr.innerHTML = "<td>" + date + "</td><td><img src= 'images/6.png' width='60' height='40' /></td>";
-                    document.getElementById("forecast").lastElementChild.append(tr);
+                    imageSrc = 'images/6.png'
                     break;
                 case 7:
-                    tr.innerHTML = "<td>" + date + "</td><td><img src= 'images/7.png' width='60' height='40' /></td>";
-                    document.getElementById("forecast").lastElementChild.append(tr);
+                    imageSrc = 'images/7.png'
                     break;
                 case 8:
-                    tr.innerHTML = "<td>" + date + "</td><td><img src= 'images/8.png' width='60' height='40' /></td>";
-                    document.getElementById("forecast").lastElementChild.append(tr);
+                    imageSrc = 'images/8.png'
                     break;
                 case 9:
-                    tr.innerHTML = "<td>" + date + "</td><td><img src= 'images/9.png' width='60' height='40' /></td>";
-                    document.getElementById("forecast").lastElementChild.append(tr);
+                    imageSrc = 'images/9.png'
                     break;
                 case 10:
-                    tr.innerHTML = "<td>" + date + "</td><td><img src= 'images/10.png' width='60' height='40' /></td>";
-                    document.getElementById("forecast").lastElementChild.append(tr);
+                    imageSrc = 'images/10.png'
                     break;
                 case 11:
-                    tr.innerHTML = "<td>" + date + "</td><td><img src= 'images/11.png' width='60' height='40' /></td>";
-                    document.getElementById("forecast").lastElementChild.append(tr);
+                    imageSrc = 'images/11.png'
                     break;
                 case 12:
-                    tr.innerHTML = "<td>" + date + "</td><td><img src= 'images/12.png' width='60' height='40' /></td>";
-                    document.getElementById("forecast").lastElementChild.append(tr);
+                    imageSrc = 'images/12.png'
                     break;
                 case 13:
-                    tr.innerHTML = "<td>" + date + "</td><td><img src= 'images/13.png' width='60' height='40' /></td>";
-                    document.getElementById("forecast").lastElementChild.append(tr);
+                    imageSrc = 'images/13.png'
                     break;
                 case 14:
-                    tr.innerHTML = "<td>" + date + "</td><td><img src= 'images/14.png' width='60' height='40' /></td>";
-                    document.getElementById("forecast").lastElementChild.append(tr);
+                    imageSrc = 'images/14.png'
                     break;
                 case 15:
-                    tr.innerHTML = "<td>" + date + "</td><td><img src= 'images/15.png' width='60' height='40' /></td>";
-                    document.getElementById("forecast").lastElementChild.append(tr);
+                    imageSrc = 'images/15.png'
                     break;
                 case 16:
-                    tr.innerHTML = "<td>" + date + "</td><td><img src= 'images/16.png' width='60' height='40' /></td>";
-                    document.getElementById("forecast").lastElementChild.append(tr);
+                    imageSrc = 'images/16.png'
                     break;
                 case 17:
-                    tr.innerHTML = "<td>" + date + "</td><td><img src= 'images/17.png' width='60' height='40' /></td>";
-                    document.getElementById("forecast").lastElementChild.append(tr);
+                    imageSrc = 'images/17.png'
                     break;
                 case 18:
-                    tr.innerHTML = "<td>" + date + "</td><td><img src= 'images/18.png' width='60' height='40' /></td>";
-                    document.getElementById("forecast").lastElementChild.append(tr);
+                    imageSrc = 'images/18.png'
                     break;
                 case 19:
-                    tr.innerHTML = "<td>" + date + "</td><td><img src= 'images/19.png' width='60' height='40' /></td>";
-                    document.getElementById("forecast").lastElementChild.append(tr);
+                    imageSrc = 'images/19.png'
                     break;
                 case 20:
-                    tr.innerHTML = "<td>" + date + "</td><td><img src= 'images/20.png' width='60' height='40' /></td>";
-                    document.getElementById("forecast").lastElementChild.append(tr);
+                    imageSrc = 'images/20.png'
                     break;
                 case 21:
-                    tr.innerHTML = "<td>" + date + "</td><td><img src= 'images/21.png' width='60' height='40' /></td>";
-                    document.getElementById("forecast").lastElementChild.append(tr);
+                    imageSrc = 'images/21.png'
                     break;
                 case 22:
-                    tr.innerHTML = "<td>" + date + "</td><td><img src= 'images/22.png' width='60' height='40' /></td>";
-                    document.getElementById("forecast").lastElementChild.append(tr);
+                    imageSrc = 'images/22.png'
                     break;
                 case 23:
-                    tr.innerHTML = "<td>" + date + "</td><td><img src= 'images/23.png' width='60' height='40' /></td>";
-                    document.getElementById("forecast").lastElementChild.append(tr);
+                    imageSrc = 'images/23.png'
                     break;
                 case 24:
-                    tr.innerHTML = "<td>" + date + "</td><td><img src= 'images/24.png' width='60' height='40' /></td>";
-                    document.getElementById("forecast").lastElementChild.append(tr);
+                    imageSrc = 'images/24.png'
                     break;
                 case 25:
-                    tr.innerHTML = "<td>" + date + "</td><td><img src= 'images/25.png' width='60' height='40' /></td>";
-                    document.getElementById("forecast").lastElementChild.append(tr);
+                    imageSrc = 'images/25.png'
                     break;
                 case 26:
-                    tr.innerHTML = "<td>" + date + "</td><td><img src= 'images/26.png' width='60' height='40' /></td>";
-                    document.getElementById("forecast").lastElementChild.append(tr);
+                    imageSrc = 'images/26.png'
                     break;
                 case 27:
-                    tr.innerHTML = "<td>" + date + "</td><td><img src= 'images/27.png' width='60' height='40' /></td>";
-                    document.getElementById("forecast").lastElementChild.append(tr);
+                    imageSrc = 'images/27.png'
                     break;
             }
-        }
-    }
+            tr.innerHTML = "<td>" + date + "</td><td><img src= '" + imageSrc + "' width='60' height='40' /></td>";
+            tableBodyElement.append(tr);
+        });
 }
